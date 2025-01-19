@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+    <!-- Unidad de persistencia con el nombre "hibernate-clase-jpa". Este nombre es utilizado en el código
+         para identificar esta configuración. -->
+    <persistence-unit name="hibernate-clase-jpa" transaction-type="RESOURCE_LOCAL">
+
+        <!-- OPCIONAL: Proveedor JPA. Aquí está comentado porque Hibernate es el proveedor predeterminado en la mayoría de configuraciones.
+        Si hubiera en las dependencias más de un proveedor JPA, como EclipseLink o OpenJPA, JPA no sabría cuál utilizar
+        y habría que especificarlo con esta propiedad-->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <!-- URL de la base de datos a la que se conectará la aplicación. -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/hibernatedb" />
+
+            <!-- Usuario de la base de datos para la conexión. -->
+            <property name="javax.persistence.jdbc.user" value="root" />
+
+            <!-- Contraseña del usuario para la conexión con la base de datos. -->
+            <property name="javax.persistence.jdbc.password" value="root" />
+
+            <!-- Driver JDBC necesario para conectarse a la base de datos. -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+
+            <!-- Esquema de generación de la base de datos:
+                 - create: Crear las tablas cuando se inicie la aplicación.
+                 - none: No realiza cambios en el esquema (ideal para entornos de producción).
+                 - drop-and-create: Borra todas las tablas y las vuelve a crear cada vez que se crea la aplicación.
+                 - update: --> Realiza cambios incrementales en el esquema para adaptarlo a las entidades definidas sin eliminar datos existentes.
+            <property name="javax.persistence.schema-generation.database.action" value="create" />
+            <!-- <property name="javax.persistence.schema-generation.database.action" value="none" /> -->
+
+            <!-- Dialecto de Hibernate que especifica cómo debe traducir las consultas SQL según el tipo de base de datos.
+                 Aquí se usa MySQL 8. -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+
+            <!-- Archivo opcional para cargar datos iniciales en la base de datos. -->
+            <property name="javax.persistence.sql-load-script-source" value="data.sql" />
+
+            <!-- Muestra las consultas SQL generadas por Hibernate en la consola, útil para depuración. -->
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

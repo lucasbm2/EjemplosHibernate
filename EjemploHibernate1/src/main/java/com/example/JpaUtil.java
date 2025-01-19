@@ -5,10 +5,13 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class JpaUtil {
-    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = // equivalencia SessionFactory
+    // Una fábrica de EntityManager, equivalente a la SessionFactory en Hibernate.
+    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY =
+            // Se crea la fábrica utilizando la unidad de persistencia definida en persistence.xml.
             Persistence.createEntityManagerFactory("hibernate-clase-jpa");
 
-    public static EntityManager getEntityManager(){ // equivalencia Session
-        return ENTITY_MANAGER_FACTORY.createEntityManager();
+    // Metodo que devuelve una nueva instancia de EntityManager, equivalente a una Session en Hibernate.
+    public static EntityManager getEntityManager() {
+        return ENTITY_MANAGER_FACTORY.createEntityManager(); // Crea y retorna un EntityManager.
     }
 }

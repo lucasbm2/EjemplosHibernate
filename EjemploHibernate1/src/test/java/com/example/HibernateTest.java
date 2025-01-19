@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.model.Employee;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -18,15 +19,15 @@ public class HibernateTest {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.beginTransaction();
+        Transaction tx = session.beginTransaction();
 
-        var employee1 = new Employee("employee1", 23);
-        var employee2 = new Employee("employee2", 25);
+        Employee employee1 = new Employee("employee1", 23);
+        Employee employee2 = new Employee("employee2", 25);
 
         session.persist(employee1);
         session.persist(employee2);
 
-        session.getTransaction().commit();
+        tx.commit();
 
         session.close();
     }
@@ -36,16 +37,17 @@ public class HibernateTest {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.beginTransaction();
+        Transaction tx = session.beginTransaction();
 
-        var employee1 = new Employee("employee1", 23);
-        var employee2 = new Employee("employee2", 25);
+        Employee employee1 = new Employee("employee1", 23);
+        Employee employee2 = new Employee("employee2", 25);
 
         session.persist(employee1);
         session.persist(employee2);
-        session.getTransaction().commit();
+        tx.commit();
 
-        var employee1FromDb = session.find(Employee.class, 1L);
+        System.out.println("Empleado creado: " + employee1);
+        Employee employee1FromDb = session.find(Employee.class, employee1.getId());
 
         System.out.println(employee1FromDb);
 
@@ -57,15 +59,13 @@ public class HibernateTest {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-
-
-        var emp1 = new Employee("employee1", 23);
+        Employee emp1 = new Employee("employee1", 23);
         emp1.setId(3L);
         emp1.setAge(24);
 
-        session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         session.merge(emp1);
-        session.getTransaction().commit();
+        tx.commit();
 
         System.out.println(emp1);
 
@@ -74,10 +74,16 @@ public class HibernateTest {
     @Test
     void delete() {
 
-
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.remove(session.find(Employee.class, 3L));
-        session.getTransaction().commit();
+        Transaction tx = session.beginTransaction();
+
+        Employee e = new Employee("employee1", 23);
+
+        session.persist(e);
+
+        System.out.println("Empleado creado para eliminar: " + e);
+        session.remove(e);
+
+        tx.commit();
     }
 }
