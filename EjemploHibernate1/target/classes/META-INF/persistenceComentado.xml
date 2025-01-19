@@ -33,7 +33,7 @@
 
             <!-- Dialecto de Hibernate que especifica cómo debe traducir las consultas SQL según el tipo de base de datos.
                  Aquí se usa MySQL 8. -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 
             <!-- Archivo opcional para cargar datos iniciales en la base de datos. -->
             <property name="javax.persistence.sql-load-script-source" value="data.sql" />
