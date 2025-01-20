@@ -12,14 +12,14 @@
         <!-- URL de conexión a la base de datos.
              Puedes añadir parámetros como createDatabaseIfNotExist=true para que la base de datos se cree si no existe. -->
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3306/hibernate_clase?createDatabaseIfNotExist=true
+            jdbc:mysql://lucasbarchin2.heliohost.us:3306/lucasbarchin2_hibernate_clase?createDatabaseIfNotExist=true
         </property>
 
         <!-- Usuario de la base de datos para establecer la conexión. -->
-        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.username">lucasbarchin2_lucas_hibernate</property>
 
         <!-- Contraseña del usuario especificado. -->
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.password">root1234</property>
 
         <!-- Número máximo de conexiones activas en el pool. -->
         <!-- Valores típicos: entre 10 y 100, dependiendo del entorno. -->
@@ -47,5 +47,6 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Asocia la clase de entidad Employee con Hibernate para que se mapee a una tabla en la base de datos. -->
         <mapping class="com.example.model.Employee" />
+        <mapping class="com.example.model.Producto" />
     </session-factory>
 </hibernate-configuration>

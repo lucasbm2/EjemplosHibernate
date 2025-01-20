@@ -50,10 +50,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+        return "Employee: |" + " ID: " + id +"-  NAME: " + name + "- AGE: " + age;
     }
 }
