@@ -1,15 +1,20 @@
 package com.example.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column (columnDefinition = "CHAR(36)")
+    private String id;
 
     @Column (name = "nombre_empleado", nullable = false,  length = 100)
     private String nombre;
@@ -18,7 +23,7 @@ public class Producto {
     private int cantidad;
 
     @Column (name = "precio_unitario", nullable = false, precision = 10, scale = 2)
-    private double precioUnitario;
+    private BigDecimal precioUnitario;
 
     @Column (name = "fecha_creacion",nullable = false)
     private Date fechaCreacion;
@@ -26,11 +31,11 @@ public class Producto {
     @Column (length = 255)
     private String descripcion;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,12 +55,12 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public double getPrecioUnitario() {
+    public BigDecimal getPrecioUnitario() {
         return precioUnitario;
     }
 
     public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
+        this.precioUnitario = BigDecimal.valueOf(precioUnitario);
     }
 
     public Date getFechaCreacion() {
@@ -74,7 +79,8 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public Producto( String nombre, int cantidad, double precioUnitario, Date fechaCreacion, String descripcion) {
+    public Producto(String id, String nombre, int cantidad, BigDecimal precioUnitario, Date fechaCreacion, String descripcion) {
+        this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
@@ -82,11 +88,25 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
+    public Producto(String nombre, int cantidad, BigDecimal precioUnitario, Date fechaCreacion, String descripcion) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.fechaCreacion = fechaCreacion;
+        this.descripcion = descripcion;
+    }
+
+
     public Producto() {
+        nombre="";
+        cantidad=0;
+        precioUnitario=BigDecimal.valueOf(0);
+        fechaCreacion = Date.valueOf(LocalDate.now());
     }
 
     @Override
     public String toString() {
-        return "Producto: |" + " ID: " + id +"-  NOMBRE: " + nombre + "- CANTIDAD: " + cantidad + "- PRECIO UNITARIO: " + precioUnitario + "- FECHA CREACION: " + fechaCreacion + "- DESCRIPCION: " + descripcion;
+        return "Producto: |" + " ID: " + id +" -  NOMBRE: " + nombre + " - CANTIDAD: " + cantidad + " - PRECIO UNITARIO: " + precioUnitario + " - FECHA CREACION: " + fechaCreacion + " - DESCRIPCION: " + descripcion;
     }
+
 }

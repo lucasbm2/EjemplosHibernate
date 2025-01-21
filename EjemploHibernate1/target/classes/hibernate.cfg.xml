@@ -12,7 +12,7 @@
         <!-- URL de conexión a la base de datos.
              Puedes añadir parámetros como createDatabaseIfNotExist=true para que la base de datos se cree si no existe. -->
         <property name="hibernate.connection.url">
-            jdbc:mysql://lucasbarchin2.heliohost.us:3306/lucasbarchin2_hibernate_clase?createDatabaseIfNotExist=true
+                jdbc:mysql://lucasbarchin2.heliohost.us:3306/lucasbarchin2_hibernate_clase?createDatabaseIfNotExist=true
         </property>
 
         <!-- Usuario de la base de datos para establecer la conexión. -->
@@ -43,7 +43,7 @@
             - create-drop: Crea el esquema y lo elimina al cerrar la sesión.
             - export: Exporta el esquema a la base de datos.
         -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Asocia la clase de entidad Employee con Hibernate para que se mapee a una tabla en la base de datos. -->
         <mapping class="com.example.model.Employee" />
