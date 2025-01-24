@@ -21,7 +21,8 @@ public class Author {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @OneToOne
+    //PARA RESCATAR LOS DATOS
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", unique = true)
     private Address address;
 
@@ -31,6 +32,11 @@ public class Author {
     public Author() {
     }
 
+    //EAGER:  las relaciones asociadas (como colecciones o entidades relacionadas)
+    // se cargan inmediatamente junto con la entidad principal, incluso si no se necesitan en ese momento.
+    //
+    //LAZY: as relaciones asociadas no se cargan inicialmente junto con la entidad principal. En su lugar,
+    // se cargan bajo demanda, es decir, cuando se accede explícitamente a ellas.
     public Author(String name, String email, LocalDate birthDate) {
 
         this.name = name;
@@ -92,7 +98,6 @@ public class Author {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
-                ", address=" + address +
                 '}';
     }
 }

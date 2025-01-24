@@ -14,11 +14,12 @@ public class OneToOneTest {
     void oneToOne() {
 
         insertData();
-        var session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        var author1 = session.find(Author.class, 2L);
+        Author author1 = session.find(Author.class, 2L);
 
-        System.out.println(author1);
+        System.out.println("AUTOR SIN DIRECCION " + author1);
+        System.out.println("DIRECCION: " + author1.getAddress());
     }
 
     void insertData() {
